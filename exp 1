@@ -1,0 +1,322 @@
+from weasyprint import HTML
+
+html_content = """<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  @page {
+    size: A4;
+    margin: 15mm 12mm;
+    background-color: #0d1117;
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    color: #c9d1d9;
+    background-color: #0d1117;
+    font-size: 10.5pt;
+    line-height: 1.6;
+  }
+
+  /* Header banner */
+  .repo-header {
+    background-color: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+  }
+
+  .repo-title {
+    font-size: 18pt;
+    font-weight: 600;
+    color: #58a6ff;
+    margin: 0 0 8px 0;
+  }
+
+  .repo-desc {
+    color: #8b949e;
+    font-size: 10pt;
+    margin: 0;
+  }
+
+  .badge-row {
+    margin-top: 10px;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 3px 8px;
+    font-size: 8pt;
+    font-family: monospace;
+    font-weight: 600;
+    border-radius: 12px;
+    margin-right: 6px;
+  }
+
+  .badge-red { background-color: rgba(248, 81, 73, 0.15); color: #f85149; border: 1px solid rgba(248, 81, 73, 0.4); }
+  .badge-blue { background-color: rgba(56, 139, 253, 0.15); color: #58a6ff; border: 1px solid rgba(56, 139, 253, 0.4); }
+  .badge-green { background-color: rgba(46, 160, 67, 0.15); color: #3fb950; border: 1px solid rgba(46, 160, 67, 0.4); }
+
+  h1, h2, h3 {
+    color: #f0f6fc;
+    font-weight: 600;
+    margin-top: 22px;
+    margin-bottom: 10px;
+    page-break-after: avoid;
+  }
+
+  h2 {
+    font-size: 13pt;
+    border-bottom: 1px solid #21262d;
+    padding-bottom: 6px;
+  }
+
+  h3 {
+    font-size: 11pt;
+    color: #58a6ff;
+  }
+
+  p {
+    margin-top: 0;
+    margin-bottom: 12px;
+  }
+
+  .alert-warning {
+    background-color: rgba(187, 128, 9, 0.1);
+    border-left: 4px solid #d29922;
+    padding: 10px 14px;
+    border-radius: 0 6px 6px 0;
+    margin-bottom: 16px;
+    font-size: 9.5pt;
+  }
+
+  .alert-title {
+    font-weight: 600;
+    color: #d29922;
+    margin-bottom: 4px;
+  }
+
+  /* Table styling */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 16px;
+    font-size: 9.5pt;
+  }
+
+  th, td {
+    padding: 8px 12px;
+    text-align: left;
+    border: 1px solid #30363d;
+  }
+
+  th {
+    background-color: #161b22;
+    color: #f0f6fc;
+    font-weight: 600;
+  }
+
+  tr:nth-child(even) {
+    background-color: #161b22;
+  }
+
+  code {
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+    font-size: 9pt;
+    background-color: rgba(110, 118, 129, 0.4);
+    color: #f0f6fc;
+    padding: 2px 5px;
+    border-radius: 4px;
+  }
+
+  .code-block {
+    background-color: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    padding: 12px 14px;
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+    font-size: 8.5pt;
+    color: #e6edf3;
+    white-space: pre-wrap;
+    word-break: break-all;
+    margin-bottom: 16px;
+  }
+
+  .workflow-box {
+    background-color: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    padding: 12px;
+    text-align: center;
+    font-family: monospace;
+    font-size: 9pt;
+    color: #3fb950;
+    margin-bottom: 16px;
+  }
+
+  ul, ol {
+    margin-top: 0;
+    margin-bottom: 14px;
+    padding-left: 20px;
+  }
+
+  li {
+    margin-bottom: 4px;
+  }
+
+  .extracted-data {
+    background-color: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    padding: 10px 14px;
+    margin-top: 8px;
+    margin-bottom: 14px;
+  }
+
+  .extracted-data span {
+    color: #f85149;
+    font-weight: bold;
+    font-family: monospace;
+  }
+</style>
+</head>
+<body>
+
+<div class="repo-header">
+  <div class="repo-title">📄 README.md — Password Capturing Using Wireshark</div>
+  <div class="repo-desc">Laboratory Experiment Report & Documentation | Wireshark Packet Analysis</div>
+  <div class="badge-row">
+    <span class="badge badge-red">Security Lab</span>
+    <span class="badge badge-blue">Wireshark v4.x</span>
+    <span class="badge badge-green">HTTP Analysis</span>
+  </div>
+</div>
+
+<div class="alert-warning">
+  <div class="alert-title">⚠️ Disclaimer & Legal Notice</div>
+  Perform packet captures only on networks, devices, and applications for which you have explicit authorization. HTTPS/TLS is designed to encrypt transport layer communications, preventing credentials from appearing as readable HTTP form data.
+</div>
+
+<h2>📑 Objective</h2>
+<p>Demonstrate how packet analyzers (such as Wireshark) can capture and expose sensitive information (usernames, passwords) transmitted through an unencrypted HTTP connection within an authorized laboratory environment.</p>
+
+<h2>🛠️ Tools & Display Filters Used</h2>
+
+<h3>Tool</h3>
+<ul>
+  <li><code>Wireshark</code> — Open-source network protocol analyzer.</li>
+</ul>
+
+<h3>Useful Display Filters</h3>
+<table>
+  <thead>
+    <tr>
+      <th style="width: 35%;">Filter</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>http</code></td>
+      <td>Filters all Hypertext Transfer Protocol traffic</td>
+    </tr>
+    <tr>
+      <td><code>http.request.method == "GET"</code></td>
+      <td>Isolates HTTP GET requests</td>
+    </tr>
+    <tr>
+      <td><code>http.request.method == "POST"</code></td>
+      <td>Isolates HTTP POST requests (typically used for form submissions)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>🔄 Experiment Workflow</h2>
+<div class="workflow-box">
+  1. Start Capture ──► 2. Open Login Page ──► 3. Filter Traffic (http) ──► 4. Inspect GET ──► 5. Inspect POST ──► 6. Expand Form Data
+</div>
+
+<h2>📝 Step-by-Step Execution & Evidence</h2>
+
+<h3>Step 1: Start Wireshark Packet Capture</h3>
+<p>Start a live capture session on the active network interface (e.g., <strong>Wi-Fi</strong>). Network packets are collected continuously before, during, and after web interactions.</p>
+<ul>
+  <li><strong>Target Interface:</strong> <code>\Device\NPF_{B049A020-DB50-40FE-B845-853876C58588}</code> (Wi-Fi)</li>
+  <li><strong>Protocols captured:</strong> TCP, TLSv1.3, UDP, HTTP, etc.</li>
+</ul>
+
+<h3>Step 2: Access Insecure Login Page & Submit Credentials</h3>
+<p>Navigate to the unencrypted test web application and submit form credentials.</p>
+<ul>
+  <li><strong>Target URL:</strong> <code>http://testasp.vulnweb.com/Login.asp?RetURL=/Templatize.asp?item=html/about.html</code></li>
+  <li><strong>Test Application:</strong> Acunetix Acuforum (Deliberately vulnerable test site)</li>
+  <li><strong>Submitted Credentials:</strong>
+    <ul>
+      <li><code>Username:</code> raham</li>
+      <li><code>Password:</code> 12345678</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Step 3: Filter Captured Traffic for HTTP</h3>
+<p>To isolate HTTP traffic from background network noise, enter the display filter <code>http</code> in the Wireshark filter bar.</p>
+<ul>
+  <li><strong>Filter Query:</strong> <code>http</code></li>
+  <li><strong>Observed Traffic:</strong> GET and POST requests flowing between the client IP (<code>2409:40f4:10fd:fa82:...</code>) and target server IP (<code>64:ff9b::2cee:1df4</code>).</li>
+</ul>
+
+<h3>Step 4: Inspect HTTP GET Requests</h3>
+<p>Filter for GET requests using <code>http.request.method == "GET"</code>.</p>
+<ul>
+  <li><strong>Observation:</strong> GET requests retrieve resources from the server but generally do not contain sensitive payload data like password form submissions.</li>
+</ul>
+
+<h3>Step 5 & 6: Locate and Inspect HTTP POST Request</h3>
+<p>Filter for HTTP POST requests using <code>http.request.method == "POST"</code> to find form submission packets.</p>
+<ul>
+  <li><strong>Selected Packet:</strong> Packet <code>34811</code></li>
+  <li><strong>Method:</strong> <code>POST /Login.asp?RetURL=/Templatize.asp?item=html/about.html HTTP/1.1</code></li>
+  <li><strong>Content-Type:</strong> <code>application/x-www-form-urlencoded</code></li>
+  <li><strong>Packet Length:</strong> 869 bytes</li>
+</ul>
+
+<h3>Step 7: Expand HTML Form URL Encoded Payload</h3>
+<p>In the Packet Details pane of Wireshark, expand the <strong>HTML Form URL Encoded</strong> section:</p>
+
+<div class="code-block">HTML Form URL Encoded: application/x-www-form-urlencoded
+    ├── Form item: "tfUName" = "raham"
+    └── Form item: "tfUPass" = "12345678"</div>
+
+<div class="extracted-data">
+  <strong>Exposed Credentials Extracted:</strong><br>
+  • <code>tfUName</code>: <span>raham</span><br>
+  • <code>tfUPass</code>: <span>12345678</span>
+</div>
+
+<h2>📌 Result & Conclusion</h2>
+<p>The capture demonstrates that Wireshark effectively reveals application-layer data when transmitted over unencrypted protocols such as HTTP. By applying basic display filters (<code>http</code>, <code>http.request.method == "POST"</code>), the login transaction packet was easily isolated, exposing plain-text credentials.</p>
+
+<h3>🔒 Key Security Takeaways</h3>
+<ol>
+  <li><strong>Enforce HTTPS/TLS:</strong> All web applications handling sensitive inputs (logins, session tokens, personal data) must mandate Transport Layer Security (HTTPS).</li>
+  <li><strong>HSTS Implementation:</strong> Deploy HTTP Strict Transport Security (HSTS) headers to force browsers to connect exclusively via HTTPS.</li>
+  <li><strong>Secure Cookie & Session Management:</strong> Ensure authentication tokens carry <code>Secure</code> and <code>HttpOnly</code> flags.</li>
+</ol>
+
+</body>
+</html>
+"""
+
+with open("README.html", "w") as f:
+    f.write(html_content)
+
+HTML("README.html").write_pdf("README_Wireshark_Experiment.pdf")
+print("PDF generated successfully.")

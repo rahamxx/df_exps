@@ -154,40 +154,17 @@ FTK Imager supports different forensic image formats.
 
 The **Raw (dd)** format is commonly used by modern forensic analysis tools.
 
-Features:
 
-* Does not contain headers.
-* Does not contain metadata.
-* Does not contain magic values.
-* Helps maintain spatial integrity.
-
----
 
 ## 🔹 SMART
 
 The **SMART** format is designed for Linux file systems.
 
-Features:
-
-* Stores disk images as pure bitstreams.
-* Supports optional compression.
-* Contains a standard header.
-* Includes sections containing data and comments.
-
----
 
 ## 🔹 E01
 
 **E01** is a proprietary forensic image format developed by EnCase.
 
-Features:
-
-* Supports compression.
-* Contains case information.
-* Includes acquisition details.
-* Contains an MD5 hash.
-* Can store examiner information.
-* Can include special notes.
 
 ---
 
@@ -315,29 +292,3 @@ Both volatile memory and non-volatile disk evidence can be acquired using the to
 
 ---
 <img width="1173" height="1341" alt="ChatGPT Image Aug 22, 2026, 05_54_21 PM" src="https://github.com/user-attachments/assets/c42bdacd-0623-4b59-ad95-2c3313bc3bf7" />
-
-# 🛡️ Key Concepts
-
-| Concept                 | Description                                              |
-| ----------------------- | -------------------------------------------------------- |
-| **FTK Imager**          | Tool used for forensic evidence acquisition and analysis |
-| **Volatile Memory**     | Temporary memory such as RAM                             |
-| **Non-Volatile Memory** | Permanent storage such as hard disks                     |
-| **Write Blocker**       | Prevents modification of the evidence disk               |
-| **Disk Image**          | A forensic copy of a storage device                      |
-| **Hash Value**          | Used to verify data integrity                            |
-| **Pagefile**            | Windows file that may contain valuable memory data       |
-
----
-
-## 👨‍💻 Tools Used
-
-* **AccessData FTK Imager**
-* **Write Blocker**
-* **Storage Device / Evidence Disk**
-
----
-
-### ✅ Conclusion
-
-FTK Imager is a useful digital forensic tool for acquiring volatile and non-volatile evidence. Proper acquisition procedures and hash verification help maintain the integrity of digital evidence.
